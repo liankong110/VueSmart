@@ -6,7 +6,7 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   height: 100%;
-  padding: 110px 20px 0 270px;
+  padding: 110px 20px 0 200px;
 }
 
 .g-statues-bar {
@@ -18,7 +18,7 @@
   box-sizing: border-box;
   width: 100%;
   height: 40px;
-  margin-left: 270px;
+  margin-left: 210px;
   background: #fff;
 }
 
@@ -80,6 +80,7 @@
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
+  width: 100%;
 }
 body{
    background-image:none!important;
@@ -101,12 +102,13 @@ body{
     <el-menu :default-active="activeMenu" class="g-side" router >
       <template v-for="(route, index) in menus">
         <template v-if="route.children">
-          <el-submenu :key="index" :index="route.name">
-            <template slot="title">
+          <el-submenu :key="index" :index="route.name">            
+            <template slot="title" >
+              <i class="el-icon-tickets"></i>
               {{route.meta.name || route.name}}</template>
-            <el-menu-item v-for="(cRoute, cIndex) in route.children" :key="cIndex" :index="cRoute.name" :route="cRoute">
-               
-              
+            <el-menu-item v-for="(cRoute, cIndex) in route.children" :key="cIndex" :index="cRoute.name" :route="cRoute"
+            v-if="!cRoute.isHide||cRoute.Hide==true"> 
+              <i class="el-icon-edit"></i>
             {{ cRoute.name||cRoute.meta.name }}</el-menu-item>
           </el-submenu>
         </template>

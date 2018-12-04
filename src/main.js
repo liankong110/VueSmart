@@ -9,6 +9,14 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 
+Vue.directive('has', {
+  inserted: function(el, binding) {
+    if (!Vue.prototype.$_has(binding.value)) {
+      el.parentNode.removeChild(el);
+    }
+  }
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -115,8 +115,7 @@ export const dateFormat = function (source, ignore_minute) {
   }
 };
 //ajax错误处理
-export const catchError = function(error) {
-  
+export const catchError = function(error) {  
   if (error.response) {
     switch (error.response.status) {
       case 400:

@@ -21,6 +21,10 @@ let baseRouter = [{
   path: '/',
   name: '首页',
   component: (resolve) => require(['../views/index.vue'], resolve),
+}, {
+  path: '/null',
+  name: '空',
+  component: (resolve) => require(['../views/null.vue'], resolve),
 }
 ]
 

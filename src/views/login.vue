@@ -29,7 +29,7 @@
           </el-form-item>
           <el-form-item>
             <el-button
-              type="primary"
+              type="primary" 
               @click="login"
               style="width:50%; float:right;"
               icon="el-icon-success"

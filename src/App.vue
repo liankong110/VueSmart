@@ -40,15 +40,15 @@ export default {
         }
 
         // Check permissions
-        if (!resourcePermission[config.method + "," + perName]) {
-          this.$message({
-            message: "无访问权限，请联系企业管理员",
-            type: "warning"
-          });
-          return Promise.reject({
-            message: "no permission"
-          });
-        }
+        // if (!resourcePermission[config.method + "," + perName]) {
+        //   this.$message({
+        //     message: "无访问权限，请联系企业管理员",
+        //     type: "warning"
+        //   });
+        //   return Promise.reject({
+        //     message: "no permission"
+        //   });
+        // }
         return config;
       });
     },
@@ -151,25 +151,22 @@ export default {
       }
 
       actualRouter.map(e => {
-        // Copy 'children' to 'meta' for rendering menu.(This step is optional.)
-
         if (e.children) {
+
           if (!e.meta) e.meta = {};
           e.meta.children = e.children;
           //给二级菜单设置beforeEnter
-          // e.children.map(t => {
-          //   return (t.beforeEnter = (to, from, next) => {
-          //     console.log("child beforeEnter");
-
-          //     console.log(to.path);
-          //     if (routePermission[to.path]) {
-          //       console.log("child next");
-          //       next();
-          //     } else {
-          //       next("/401");
-          //     }
-          //   });
-          // });
+          e.children.map(t => {
+         
+            return (t.beforeEnter = (to, from, next) => {   
+                 console.log(1);         
+              if (routePermission[to.path]) {               
+                next();
+              } else {
+                next("/401");
+              }
+            });
+          });
         }
 
         // Add Per-Route Guard
@@ -191,9 +188,9 @@ export default {
 
       // Add actual routing to application
 
-      let originPath = AllRoutesData;//util.deepcopy(AllRoutesData);
-      console.table({ actualRouter });
-      //originPath[0].children = actualRouter;
+      let originPath = util.deepcopy(AllRoutesData);
+      //console.table({ actualRouter });
+      originPath[0].children = actualRouter;
 
       this.$router.addRoutes(
         originPath.concat([
